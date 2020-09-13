@@ -66,6 +66,10 @@ class Server {
         handle(path, "OPTIONS", handleFunc)
     }
 
+    fun trace(path: String, handleFunc: (Request, Response) -> Unit) {
+        handle(path, "TRACE", handleFunc)
+    }
+
     private fun handle(path: String, method: String, handleFunc: (Request, Response) -> Unit) {
         val handler = Handler(
             path,
