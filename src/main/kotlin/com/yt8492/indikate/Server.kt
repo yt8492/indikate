@@ -49,6 +49,11 @@ class Server {
     fun put(path: String, handleFunc: (Request, Response) -> Unit) {
         handle(path, "PUT", handleFunc)
     }
+
+    fun head(path: String, handleFunc: (Request, Response) -> Unit) {
+        handle(path, "HEAD", handleFunc)
+    }
+
     private fun handle(path: String, method: String, handleFunc: (Request, Response) -> Unit) {
         val handler = Handler(
             path,
