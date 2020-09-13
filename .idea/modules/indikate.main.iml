@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="3" platform="JavaScript " allPlatforms="JS []" useProjectSettings="false" isTestModule="false" externalProjectId="indikate" pureKotlinSourceFolders="$MODULE_DIR$/../../src/test/kotlin;/Users/yt8492/IdeaProjects/indikate/src/main/kotlin;/Users/yt8492/IdeaProjects/indikate/build/externals/indikate/src">
+        <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <compilerSettings>
+          <option name="additionalArguments" value="-Xir-module-name=com.yt8492:indikate -Xir-only -Xir-produce-klib-dir" />
+        </compilerSettings>
+        <compilerArguments>
+          <option name="outputFile" value="$MODULE_DIR$/../../build/classes/kotlin/main/indikate.js" />
+          <option name="noStdlib" value="true" />
+          <option name="sourceMap" value="true" />
+          <option name="metaInfo" value="true" />
+          <option name="target" value="v5" />
+          <option name="moduleKind" value="umd" />
+          <option name="main" value="call" />
+          <option name="languageVersion" value="1.4" />
+          <option name="apiVersion" value="1.4" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="multiPlatform" value="true" />
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+</module>
