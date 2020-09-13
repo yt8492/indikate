@@ -70,6 +70,10 @@ class Server {
         handle(path, "TRACE", handleFunc)
     }
 
+    fun patch(path: String, handleFunc: (Request, Response) -> Unit) {
+        handle(path, "PATCH", handleFunc)
+    }
+
     private fun handle(path: String, method: String, handleFunc: (Request, Response) -> Unit) {
         val handler = Handler(
             path,
