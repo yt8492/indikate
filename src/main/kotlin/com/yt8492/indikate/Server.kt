@@ -62,6 +62,10 @@ class Server {
         handle(path, "CONNECT", handleFunc)
     }
 
+    fun options(path: String, handleFunc: (Request, Response) -> Unit) {
+        handle(path, "OPTIONS", handleFunc)
+    }
+
     private fun handle(path: String, method: String, handleFunc: (Request, Response) -> Unit) {
         val handler = Handler(
             path,
