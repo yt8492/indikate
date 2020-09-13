@@ -58,6 +58,10 @@ class Server {
         handle(path, "DELETE", handleFunc)
     }
 
+    fun connect(path: String, handleFunc: (Request, Response) -> Unit) {
+        handle(path, "CONNECT", handleFunc)
+    }
+
     private fun handle(path: String, method: String, handleFunc: (Request, Response) -> Unit) {
         val handler = Handler(
             path,
