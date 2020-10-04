@@ -1,3 +1,5 @@
+import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
+import org.gradle.api.publish.maven.internal.artifact.FileBasedMavenArtifact
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -33,11 +35,29 @@ val sourcesJar by tasks.registering(Jar::class) {
     from(kotlin.sourceSets["main"].kotlin.srcDirs)
 }
 
+tasks.withType<BintrayUploadTask> {
+    doFirst {
+        publishing.publications
+            .filterIsInstance<MavenPublication>()
+            .forEach { publication ->
+                val moduleFile = buildDir.resolve("publications/${publication.name}/module.json")
+                if (moduleFile.exists()) {
+                    publication.artifact(object : FileBasedMavenArtifact(moduleFile) {
+                        override fun getDefaultExtension() = "module"
+                    })
+                }
+            }
+    }
+}
+
 publishing {
     publications.invoke {
         register("maven", MavenPublication::class) {
             from(components["kotlin"])
             artifact(sourcesJar.get())
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = libVersion
         }
     }
 }
