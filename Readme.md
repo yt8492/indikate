@@ -30,7 +30,7 @@ fun main() {
         response.message = "Hello indikate!"
     }
     server.post("/") { request, response ->
-        val contentType = request.headers["Content-Type"]
+        val contentType = request.headers["content-type"]
         val body = request.body
         response.message = """
             contentType: $contentType
