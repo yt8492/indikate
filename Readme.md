@@ -22,7 +22,7 @@ dependencies {
 ## Usage
 
 ```kotlin
-import com.yt8492.indikate.Server
+import Server
 
 fun main() {
     val server = Server()

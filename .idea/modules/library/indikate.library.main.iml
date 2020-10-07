@@ -2,19 +2,13 @@
 <module version="4">
   <component name="FacetManager">
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="3" platform="JavaScript " allPlatforms="JS []" useProjectSettings="false" isTestModule="true" externalProjectId="indikate" pureKotlinSourceFolders="$MODULE_DIR$/../../src/test/kotlin;/Users/yt8492/IdeaProjects/indikate/src/main/kotlin;/Users/yt8492/IdeaProjects/indikate/build/externals/indikate/src">
-        <sourceSets>
-          <sourceSet>indikate.main</sourceSet>
-        </sourceSets>
+      <configuration version="3" platform="JavaScript " allPlatforms="JS []" useProjectSettings="false" isTestModule="false" externalProjectId=":library" pureKotlinSourceFolders="$MODULE_DIR$/../../../library/src/test/kotlin;/Users/yt8492/IdeaProjects/indikate/library/src/main/kotlin;/Users/yt8492/IdeaProjects/indikate/library/build/externals/indikate-library/src">
         <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
-        <externalSystemTestTasks>
-          <externalSystemTestTask>nodeTest|indikate:test|js</externalSystemTestTask>
-        </externalSystemTestTasks>
         <compilerSettings>
-          <option name="additionalArguments" value="-Xir-module-name=com.yt8492:indikate_test -Xir-only -Xir-produce-klib-dir" />
+          <option name="additionalArguments" value="-Xir-module-name=com.yt8492:library -Xir-only -Xir-produce-klib-dir" />
         </compilerSettings>
         <compilerArguments>
-          <option name="outputFile" value="$MODULE_DIR$/../../build/classes/kotlin/test/indikate_test.js" />
+          <option name="outputFile" value="$MODULE_DIR$/../../../library/build/classes/kotlin/main/library.js" />
           <option name="noStdlib" value="true" />
           <option name="sourceMap" value="true" />
           <option name="metaInfo" value="true" />
