@@ -9,10 +9,8 @@ plugins {
     id("com.jfrog.bintray") version "1.8.5"
 }
 
-val libVersion = "0.0.1"
-
-group = "com.yt8492"
-version = libVersion
+group = Packages.group
+version = Packages.version
 
 repositories {
     mavenCentral()
@@ -57,7 +55,7 @@ publishing {
             artifact(sourcesJar.get())
             groupId = project.group.toString()
             artifactId = project.name
-            version = libVersion
+            version = Packages.version
         }
     }
 }
@@ -78,7 +76,7 @@ bintray {
         vcsUrl = "$githubUrl.git"
         issueTrackerUrl = "$githubUrl/issues"
         publicDownloadNumbers = true
-        version.name = libVersion
+        version.name = Packages.version
         version.released = dateFormat.format(Date())
         setLabels("kotlin", "kotlinjs", "nodejs")
         description = "Simple Server-side Framework for Kotlin/JS"
