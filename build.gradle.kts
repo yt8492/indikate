@@ -6,3 +6,5 @@ repositories {
     mavenCentral()
     jcenter()
 }
+
+tasks.register<GenerateReadme>("generateReadme")

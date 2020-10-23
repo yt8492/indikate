@@ -2,7 +2,7 @@ plugins {
     kotlin("js")
 }
 
-version = "0.0.1"
+version = Packages.version
 
 repositories {
     mavenCentral()
