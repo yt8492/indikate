@@ -3,7 +3,7 @@
 
 Simple Server-side Framework for Kotlin/JS
 
-## installation
+## Installation
 
 ### Gradle
 
@@ -22,7 +22,7 @@ dependencies {
 ## Usage
 
 ```kotlin
-import Server
+import com.yt8492.indikate.Server
 
 fun main() {
     val server = Server()
@@ -46,6 +46,4 @@ fun main() {
 
 ## License
 
-This project is licensed under the terms of the
-[MIT license](/LICENSE).
-
+This project is licensed under the terms of the [MIT license](/LICENSE).
