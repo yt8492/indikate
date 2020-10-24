@@ -1,5 +1,7 @@
 package com.yt8492.indikate
 
+import Buffer
+
 class Server {
 
     private val handlers = mutableListOf<Handler>()
@@ -15,7 +17,8 @@ class Server {
             return@createServer
         }
         req.on("data") { data: Any ->
-            bodyBuilder.append(data.toString())
+            data as Buffer
+            bodyBuilder.append(data.toString(encoding = "UTF-8"))
         }
         req.on("end") { ->
             val headers = Headers(req.headers)
