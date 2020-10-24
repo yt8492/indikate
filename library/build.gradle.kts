@@ -54,7 +54,7 @@ publishing {
             from(components["kotlin"])
             artifact(sourcesJar.get())
             groupId = project.group.toString()
-            artifactId = project.name
+            artifactId = "indikate"
             version = Packages.version
         }
     }
