@@ -54,7 +54,7 @@ publishing {
             from(components["kotlin"])
             artifact(sourcesJar.get())
             groupId = project.group.toString()
-            artifactId = project.name
+            artifactId = "indikate"
             version = Packages.version
         }
     }
@@ -64,8 +64,8 @@ val githubUrl = "https://github.com/yt8492/indikate"
 val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZ")
 
 bintray {
-    user = project.property("bintrayUser")?.toString()
-    key = project.property("bintrayKey")?.toString()
+    user = project.property("bintrayUser")?.toString() ?: System.getenv("BINTRAY_USER")
+    key = project.property("bintrayKey")?.toString() ?: System.getenv("BINTRAY_KEY")
     publish = true
     setPublications("maven")
     pkg.apply {
