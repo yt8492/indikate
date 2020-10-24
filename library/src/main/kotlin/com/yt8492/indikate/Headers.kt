@@ -7,6 +7,6 @@ class Headers(
     private val incomingHttpHeaders: IncomingHttpHeaders
 ) {
     operator fun get(name: String): String? {
-        return incomingHttpHeaders[name] as? String
+        return incomingHttpHeaders[name.toLowerCase()] as? String
     }
 }
