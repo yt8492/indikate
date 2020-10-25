@@ -35,6 +35,15 @@ class Server {
             )
             val response = Response()
             handler.handleFunc(request, response)
+            response.headers
+                .groupBy({
+                    it.name
+                }, {
+                    it.value
+                })
+                .forEach {
+                    res.setHeader(it.key, it.value.toTypedArray())
+                }
             res.statusCode = response.statusCode
             res.write(response.message)
             res.end()
