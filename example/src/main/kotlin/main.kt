@@ -9,6 +9,7 @@ fun main() {
         val contentType = request.headers["content-type"]
         val body = request.body
         println(body)
+        println(request.headers.getAll("Hoge").joinToString("\n") { "Hoge: $it" })
         response.message = """
             contentType: $contentType
             body: $body
