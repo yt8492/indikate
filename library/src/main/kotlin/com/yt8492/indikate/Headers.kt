@@ -1,16 +1,8 @@
 package com.yt8492.indikate
 
-class Headers(
-    rawHeaders: Array<String>
-) : Iterable<Headers.Entry> {
+class Headers : Iterable<Headers.Entry> {
 
     private val headers = mutableSetOf<Entry>()
-
-    init {
-        for (i in rawHeaders.indices step 2) {
-            headers.add(Entry(rawHeaders[i], rawHeaders[i + 1]))
-        }
-    }
 
     operator fun get(name: String): String? {
         return headers.firstOrNull {
@@ -38,4 +30,14 @@ class Headers(
     }
 
     data class Entry(val name: String, val value: String)
+
+    companion object {
+        fun fromNodeRawHeaders(rawHeaders: Array<String>): Headers {
+            return Headers().apply {
+                for (i in rawHeaders.indices step 2) {
+                    add(rawHeaders[i], rawHeaders[i + 1])
+                }
+            }
+        }
+    }
 }

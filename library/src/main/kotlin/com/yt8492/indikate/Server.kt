@@ -21,7 +21,7 @@ class Server {
             bodyBuilder.append(data.toString(encoding = "UTF-8"))
         }
         req.on("end") { ->
-            val headers = Headers(req.rawHeaders)
+            val headers = Headers.fromNodeRawHeaders(req.rawHeaders)
             val queryParameters = QueryParameters(
                 querystring.parse(url.parse(req.url).query ?: "")
             )
