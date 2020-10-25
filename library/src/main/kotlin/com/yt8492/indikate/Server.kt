@@ -21,7 +21,7 @@ class Server {
             bodyBuilder.append(data.toString(encoding = "UTF-8"))
         }
         req.on("end") { ->
-            val headers = Headers(req.rawHeaders)
+            val headers = Headers.fromNodeRawHeaders(req.rawHeaders)
             val queryParameters = QueryParameters(
                 querystring.parse(url.parse(req.url).query ?: "")
             )
@@ -35,6 +35,15 @@ class Server {
             )
             val response = Response()
             handler.handleFunc(request, response)
+            response.headers
+                .groupBy({
+                    it.name
+                }, {
+                    it.value
+                })
+                .forEach {
+                    res.setHeader(it.key, it.value.toTypedArray())
+                }
             res.statusCode = response.statusCode
             res.write(response.message)
             res.end()

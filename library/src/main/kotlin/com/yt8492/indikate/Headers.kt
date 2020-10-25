@@ -1,36 +1,43 @@
 package com.yt8492.indikate
 
-class Headers(
-    rawHeaders: Array<String>
-) : Iterable<Map.Entry<String, String>> {
+class Headers : Iterable<Headers.Entry> {
 
-    private val headers = mutableSetOf<Map.Entry<String, String>>()
-
-    init {
-        for (i in rawHeaders.indices step 2) {
-            headers.add(Entry(rawHeaders[i], rawHeaders[i + 1]))
-        }
-    }
+    private val headers = mutableSetOf<Entry>()
 
     operator fun get(name: String): String? {
         return headers.firstOrNull {
-            it.key.toLowerCase() == name.toLowerCase()
+            it.name.toLowerCase() == name.toLowerCase()
         }?.value
     }
 
     fun getAll(name: String): List<String> {
         return headers.asSequence()
-            .filter { it.key.toLowerCase() == name.toLowerCase() }
+            .filter { it.name.toLowerCase() == name.toLowerCase() }
             .map { it.value }
             .toList()
     }
 
-    override fun iterator(): Iterator<Map.Entry<String, String>> {
+    fun add(name: String, value: String) {
+        headers.add(Entry(name, value))
+    }
+
+    fun add(name: String, values: List<String>) {
+        headers.addAll(values.map { Entry(name, it) })
+    }
+
+    override fun iterator(): Iterator<Entry> {
         return headers.iterator()
     }
 
-    private data class Entry<K, V>(
-        override val key: K,
-        override val value: V
-    ) : Map.Entry<K, V>
+    data class Entry(val name: String, val value: String)
+
+    companion object {
+        fun fromNodeRawHeaders(rawHeaders: Array<String>): Headers {
+            return Headers().apply {
+                for (i in rawHeaders.indices step 2) {
+                    add(rawHeaders[i], rawHeaders[i + 1])
+                }
+            }
+        }
+    }
 }
