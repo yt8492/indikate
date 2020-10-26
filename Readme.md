@@ -1,5 +1,5 @@
 # indikate
-[ ![Download](https://api.bintray.com/packages/yt8492/maven/indikate/images/download.svg?version=0.0.1) ](https://bintray.com/yt8492/maven/indikate/0.0.1/link)
+[ ![Download](https://api.bintray.com/packages/yt8492/maven/indikate/images/download.svg?version=0.0.2) ](https://bintray.com/yt8492/maven/indikate/0.0.2/link)
 
 Simple Server-side Framework for Kotlin/JS
 
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation "com.yt8492:indikate:0.0.1"
+    implementation "com.yt8492:indikate:0.0.2"
 }
 ```
 
