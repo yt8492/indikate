@@ -37,8 +37,13 @@ jobs:
         run: |
           git config --local user.email "tmymyut2000@gmail.com"
           git config --local user.name "yt8492"
-      - name: Push Readme
+      - name: Commit Readme
         run: |
           git add Readme.md
           git commit -m "update Readme"
           git push origin master
+      - name: Push Readme
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
