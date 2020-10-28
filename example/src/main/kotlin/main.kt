@@ -6,7 +6,8 @@ fun main() {
         response.message = "Hello indikate!"
     }
     server.post("/") { request, response ->
-        val contentType = request.headers["content-type"]
+        val hogeHeader = request.headers["Hoge"]
+        val fugaHeaders = request.headers.getAll("Fuga")
         val body = request.body
         println(body)
         response.headers.add("Hoge", "hoge")
@@ -14,7 +15,8 @@ fun main() {
         response.headers.add("Foo", "foo")
         response.headers.add("Foo", "bar")
         response.message = """
-            contentType: $contentType
+            hoge: $hogeHeader
+            fuga: ${fugaHeaders.joinToString(",")}
             body: $body
         """.trimIndent()
         response.statusCode = 200
