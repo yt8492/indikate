@@ -6,13 +6,13 @@ class Headers : Iterable<Headers.Entry> {
 
     operator fun get(name: String): String? {
         return headers.firstOrNull {
-            it.name.toLowerCase() == name.toLowerCase()
+            it.name.equals(name, ignoreCase = true)
         }?.value
     }
 
     fun getAll(name: String): List<String> {
         return headers.asSequence()
-            .filter { it.name.toLowerCase() == name.toLowerCase() }
+            .filter { it.name.equals(name, ignoreCase = true) }
             .map { it.value }
             .toList()
     }

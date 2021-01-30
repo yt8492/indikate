@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="example-0.0.2">
+    <output-path>$PROJECT_DIR$/example/build/libs</output-path>
+    <root id="archive" name="example-0.0.2.jar">
+      <element id="module-output" name="indikate.example.main" />
+    </root>
+  </artifact>
+</component>
