@@ -1,7 +1,9 @@
 package com.yt8492.indikate
 
 data class Handler(
-    val path: String,
+    val routingPath: RoutingPath,
     val method: String,
-    val handleFunc: (request: Request, response: Response) -> Unit
+    val handleFunc: HandleFunc
 )
+
+typealias HandleFunc = (request: Request, response: Response) -> Unit

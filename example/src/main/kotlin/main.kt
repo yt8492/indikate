@@ -21,6 +21,16 @@ fun main() {
         """.trimIndent()
         response.statusCode = 200
     }
+    server.get("/hoge/fuga") { request, response ->
+        response.message = "const routing"
+    }
+    server.get("/hoge/:fuga") { request, response ->
+        val parameter = request.pathParameters.require("fuga")
+        response.message = "parameter: $parameter"
+    }
+    server.get("/hoge/*") { request, response ->
+        response.message = "unreachable section"
+    }
     server.listen(8080) {
         println("server start")
     }

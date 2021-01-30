@@ -4,18 +4,23 @@ import Buffer
 
 class Server {
 
-    private val handlers = mutableListOf<Handler>()
+    private val newHandlers = mutableListOf<Handler>()
 
     private val server = http.createServer { req, res ->
         val bodyBuilder = StringBuilder()
         val path = url.parse(req.url).pathname ?: "/"
-        val handler = handlers.firstOrNull {
-            it.path == path && it.method == req.method
+        val (evaluateResult, newHandler) = newHandlers.associateBy {
+            it.routingPath.evaluate(path)
+        }.filter { (result, _) ->
+            result.succeeded
+        }.maxByOrNull { (result, _) ->
+            result.quality
         } ?: run {
             res.statusCode = 404
             res.end()
             return@createServer
         }
+        val pathParameters = PathParameters(evaluateResult.parameters)
         req.on("data") { data: Any ->
             data as Buffer
             bodyBuilder.append(data.toString(encoding = "UTF-8"))
@@ -26,15 +31,16 @@ class Server {
                 querystring.parse(url.parse(req.url).query ?: "")
             )
             val body = bodyBuilder.toString()
-            val request = Request(
+            val newRequest = Request(
                 req.url,
                 req.method,
                 headers,
+                pathParameters,
                 queryParameters,
                 body
             )
             val response = Response()
-            handler.handleFunc(request, response)
+            newHandler.handleFunc(newRequest, response)
             response.headers
                 .groupBy({
                     it.name
@@ -50,49 +56,49 @@ class Server {
         }
     }
 
-    fun get(path: String, handleFunc: (Request, Response) -> Unit) {
+    fun get(path: String, handleFunc: HandleFunc) {
         handle(path, "GET", handleFunc)
     }
 
-    fun post(path: String, handleFunc: (Request, Response) -> Unit) {
+    fun post(path: String, handleFunc: HandleFunc) {
         handle(path, "POST", handleFunc)
     }
 
-    fun put(path: String, handleFunc: (Request, Response) -> Unit) {
+    fun put(path: String, handleFunc: HandleFunc) {
         handle(path, "PUT", handleFunc)
     }
 
-    fun head(path: String, handleFunc: (Request, Response) -> Unit) {
+    fun head(path: String, handleFunc: HandleFunc) {
         handle(path, "HEAD", handleFunc)
     }
 
-    fun delete(path: String, handleFunc: (Request, Response) -> Unit) {
+    fun delete(path: String, handleFunc: HandleFunc) {
         handle(path, "DELETE", handleFunc)
     }
 
-    fun connect(path: String, handleFunc: (Request, Response) -> Unit) {
+    fun connect(path: String, handleFunc: HandleFunc) {
         handle(path, "CONNECT", handleFunc)
     }
 
-    fun options(path: String, handleFunc: (Request, Response) -> Unit) {
+    fun options(path: String, handleFunc: HandleFunc) {
         handle(path, "OPTIONS", handleFunc)
     }
 
-    fun trace(path: String, handleFunc: (Request, Response) -> Unit) {
+    fun trace(path: String, handleFunc: HandleFunc) {
         handle(path, "TRACE", handleFunc)
     }
 
-    fun patch(path: String, handleFunc: (Request, Response) -> Unit) {
+    fun patch(path: String, handleFunc: HandleFunc) {
         handle(path, "PATCH", handleFunc)
     }
 
-    private fun handle(path: String, method: String, handleFunc: (Request, Response) -> Unit) {
-        val handler = Handler(
-            path,
+    private fun handle(path: String, method: String, handleFunc: HandleFunc) {
+        val newHandler = Handler(
+            RoutingPath.parse(path),
             method,
             handleFunc
         )
-        handlers.add(handler)
+        newHandlers.add(newHandler)
     }
 
     fun listen(port: Int, onStart: () -> Unit) {
